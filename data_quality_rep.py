@@ -23,7 +23,6 @@ cat = cat.drop(columns=["id","age","balance","day","campaign","pdays","previous"
 with open("CONT.csv","w+")as f:
     f.write("Feature, Count, % Miss., Card., Min., 1st Qrt., Mean, Median, 3rd Qrt., Max., Std. Dev.\n")
     for col in con.columns:
-        print(col)
         ls = []
         ls.append(col)
         #print(con[col])
@@ -50,7 +49,6 @@ with open("CONT.csv","w+")as f:
 with open("CAT.csv","w+")as f:
     f.write("Feature , Count , % Miss. , Card. , Mode , Mode Freq. , Mode % , 2nd Mode , 2nd Mode Freq. , 2nd Mode %\n")
     for col in cat.columns:
-        print(col)
         ls = [] 
         ls.append(col)
         ls.append(cat[col].count())
@@ -69,7 +67,7 @@ with open("CAT.csv","w+")as f:
         ls.append(cat[col].value_counts()[ls[7]])
         ls.append(round(ls[8]/(ls[1] - ls[2])* 100, 2))
 
-        f.write(str(ls).replace("["," ").replace("]"," ").replace("'"," "))
+        f.write(str(ls).replace("[","").replace("]","").replace("'",""))
         f.write("\n")
 
     
