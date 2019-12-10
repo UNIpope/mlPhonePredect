@@ -9,7 +9,7 @@ with open("feature_names.txt") as f:
         head.append(line.strip())
 
 #read in data set
-df = pd.read_csv("trainingset.csv", na_values="?")
+df = pd.read_csv("trainingset.csv", na_values="unknown ")
 df.columns = head
 
 # split data in continus and catigorical
