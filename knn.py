@@ -5,6 +5,9 @@ import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 import numpy as np
+from sklearn import metrics
+
+
 
 head = []
 with open("feature_names.txt") as f:
@@ -30,6 +33,8 @@ print(x)
 
 print(x.shape)
 print(y.shape)
+
+# splits data into training and testing
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.20)
 
 model = KNeighborsClassifier(n_neighbors=3)
@@ -40,15 +45,12 @@ model.fit(X_train, y_train.values.ravel())
 predictions = model.predict(X_test)
 
 print(predictions)
+print((metrics.accuracy_score(y_test, predictions))*100)
+
+# exports as csv
+# df = pd.DataFrame(data=predictions)
+# df.to_csv("./knnpred.csv", sep=',', index=False)
 
 
-df = pd.DataFrame(data=predictions)
-df.to_csv("./knnpred.csv", sep=',', index=False)
-
-
-# #creating labelEncoder
-# le = preprocessing.LabelEncoder()
-#
-# # Converting string labels into numbers.
-# weather_encoded=le.fit_transform(weather)
-# print(weather_encoded)
+# another good ewbsite for knn
+# https://www.datacamp.com/community/tutorials/k-nearest-neighbor-classification-scikit-learn
