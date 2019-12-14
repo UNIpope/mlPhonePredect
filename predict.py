@@ -4,7 +4,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn import metrics
-
+from sklearn.metrics import log_loss
 
 head = []
 with open("feature_names.txt") as f:
@@ -42,9 +42,10 @@ model = GaussianNB()
 model.fit(X_train, y_train.values.ravel())
 
 #Predict Output
-predictions = model.predict(X_test) # 0:Overcast, 2:Mild
-print ("Predicted Value:", predictions)
-print((metrics.accuracy_score(y_test, predictions))*100)
+predictions = model.predict(y_train)
+print("Predicted Value:", predictions)
+print(metrics.accuracy_score(y_test, predictions))
+# print((metrics.accuracy_score(y_test, predictions))*100)
 # # exports as csv
 # df = pd.DataFrame(data=predictions)
 # df.to_csv("./nbpred.csv", sep=',', index=False)
