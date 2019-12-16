@@ -1,11 +1,13 @@
-from sklearn.naive_bayes import GaussianNB
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn import metrics
 from sklearn.metrics import log_loss
+
 from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 
 head = []
 with open("cl_feat.txt") as f:
@@ -36,7 +38,9 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.20)
 # https://www.datacamp.com/community/tutorials/naive-bayes-scikit-learn
 #Create a Gaussian Classifier
 #model = GaussianNB()
+
 model = LogisticRegression()
+#model = KNeighborsClassifier(n_neighbors=3)
 
 # Train the model using the training sets
 model.fit(X_train, y_train.values.ravel())
@@ -58,10 +62,11 @@ for i in queries:
     else:
         ls.append("yes")
 
-with open("predictions","w") as out:
+with open("predictions.csv","w") as out:
+    labledtst = []
     i = 1
     for row in ls:
-        out.write("TEST{},{}".format(i,row))
-        out.write("\n")
+        labledtst.append("TEST{},{}".format(i,row))
         i += 1
 
+    out.write("\n".join(labledtst))
