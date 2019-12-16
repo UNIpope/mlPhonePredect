@@ -40,11 +40,11 @@ model = GaussianNB()
 model.fit(X_train, y_train.values.ravel())
 
 #Predict Output of test set 
-predictions = model.predict(y_test)
+predictions = model.predict(X_test)
 print("Predicted Value:", predictions)
 print((metrics.accuracy_score(y_test, predictions))*100)
 
-#Predict Output of actual queries 
+#Predict Output of actual queries
 queries = model.predict(p)
 print("Predicted Value:", queries)
 
