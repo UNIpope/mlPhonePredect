@@ -7,26 +7,24 @@ from sklearn import metrics
 from sklearn.metrics import log_loss
 
 head = []
-with open("feature_names.txt") as f:
+with open("cl_feat.txt") as f:
     for line in f:
         head.append(line.strip())
 
 #read in data set
-df_train = pd.read_csv("trainingset.csv", na_values="?")
+df_train = pd.read_csv("cl_data.csv", na_values="?")
 df_train.columns = head
 
 
-df_test = pd.read_csv("queries.csv")
-df_test.columns = head
-# x = df_train[['job', 'marital', 'education', 'housing', 'loan', 'age', 'campaign', 'previous']]
+df_pred = pd.read_csv("cl_queries.csv")
+df_pred.columns = head
 
-x = df_train[['age', 'campaign', 'previous']]
-
+x = df_train.drop("target", axis=1)
 y = df_train[['target']]
 
+p = df_pred.drop("target", axis=1)
 
 print(x)
-
 print(x.shape)
 print(y.shape)
 
@@ -41,11 +39,27 @@ model = GaussianNB()
 # Train the model using the training sets
 model.fit(X_train, y_train.values.ravel())
 
-#Predict Output
-predictions = model.predict(y_train)
+#Predict Output of test set 
+predictions = model.predict(y_test)
 print("Predicted Value:", predictions)
-print(metrics.accuracy_score(y_test, predictions))
-# print((metrics.accuracy_score(y_test, predictions))*100)
-# # exports as csv
-# df = pd.DataFrame(data=predictions)
-# df.to_csv("./nbpred.csv", sep=',', index=False)
+print((metrics.accuracy_score(y_test, predictions))*100)
+
+#Predict Output of actual queries 
+queries = model.predict(p)
+print("Predicted Value:", queries)
+
+#output file for queries
+ls = []
+for i in queries:
+    if i == 0:
+        ls.append("no")
+    else:
+        ls.append("yes")
+
+with open("predictions","w") as out:
+    i = 1
+    for row in ls:
+        out.write("TEST{},{}".format(i,row))
+        out.write("\n")
+        i += 1
+
