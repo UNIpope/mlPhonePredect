@@ -3,14 +3,6 @@ from pprint import pprint
 import collections
 from sklearn.preprocessing import LabelEncoder
 
-"""
-from sklearn.preprocessing import OneHotEncoder
-oe = OneHotEncoder()
-df[cat_cols] = df[cat_cols].apply(lambda col: le.fit_transform(col))
-
-print(df[cat_cols])
-"""
-
 #read in hedders
 head = []
 with open("feature_names.txt") as f:

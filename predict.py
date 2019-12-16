@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn import metrics
 from sklearn.metrics import log_loss
+from sklearn.linear_model import LogisticRegression
 
 head = []
 with open("cl_feat.txt") as f:
@@ -34,7 +35,8 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.20)
 
 # https://www.datacamp.com/community/tutorials/naive-bayes-scikit-learn
 #Create a Gaussian Classifier
-model = GaussianNB()
+#model = GaussianNB()
+model = LogisticRegression()
 
 # Train the model using the training sets
 model.fit(X_train, y_train.values.ravel())
