@@ -46,6 +46,10 @@ for feat in imp_list:
     df[feat] = df[feat].fillna(method='pad')
     print(df[feat])
 
+for featq in imp_list:
+    dfq[feat] = dfq[feat].fillna(method='pad')
+    print(dfq[feat])
+
 #output csv
 df.to_csv("cl_data.csv", header=True) 
 dfq.to_csv("cl_queries.csv", header=True)

@@ -9,7 +9,7 @@ with open("feature_names.txt") as f:
         head.append(line.strip())
 
 #read in data set
-df = pd.read_csv("trainingset.csv", na_values="unknown ")
+df = pd.read_csv("queries.csv", na_values="unknown ")
 df.columns = head
 
 # split data in continus and catigorical
@@ -63,9 +63,12 @@ with open("CAT.csv","w+")as f:
         ls.append(cat[col].mode()[0])
         ls.append(cat[col].value_counts()[ls[4]])
         ls.append(round(ls[5]/(ls[1] - ls[2])* 100, 2))
-        ls.append(list(cat[col].value_counts().index)[1])
-        ls.append(cat[col].value_counts()[ls[7]])
-        ls.append(round(ls[8]/(ls[1] - ls[2])* 100, 2))
+        
+        if ls[3] > 1:
+            hi = list(cat[col].value_counts().index)[1]
+            ls.append(list(cat[col].value_counts().index)[1])
+            ls.append(cat[col].value_counts()[ls[7]])
+            ls.append(round(ls[8]/(ls[1] - ls[2])* 100, 2))
 
         f.write(str(ls).replace("[","").replace("]","").replace("'",""))
         f.write("\n")
