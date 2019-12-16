@@ -1,0 +1,15 @@
+id
+age
+job
+marital
+education
+default
+balance
+housing
+loan
+day
+month
+campaign
+pdays
+previous
+target

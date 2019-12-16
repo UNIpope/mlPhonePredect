@@ -37,9 +37,9 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.20)
 
 # https://www.datacamp.com/community/tutorials/naive-bayes-scikit-learn
 #Create a Gaussian Classifier
-#model = GaussianNB()
+model = GaussianNB()
 
-model = LogisticRegression()
+#model = LogisticRegression()
 #model = KNeighborsClassifier(n_neighbors=3)
 
 # Train the model using the training sets
